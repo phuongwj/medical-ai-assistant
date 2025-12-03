@@ -6,4 +6,4 @@ This is a capstone project for Dalhousie Cloud Computing course - CSCI 3124, whe
 
 ## Small note
 
-This is a simple chat application between doctor and patient, I initially didn't want to add the word "AI" to the project cause I don't want to jinx it. I want to have a good base first (i.e. a chat application with frontend + backend + cloud integration) then will incorporate AWS Bedrock for the actual RAG-implementation if I have enough time.
+This is a simple chat application between doctor and patient, I initially didn't want to add the word "AI" to the project cause I don't want to jinx it. I want to have a good base first (i.e. a chat application with frontend + backend + cloud integration) then will incorporate AWS Bedrock or a local/open-source model for the actual RAG-implementation if I have enough time.
