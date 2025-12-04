@@ -1,68 +1,67 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
+    /* Glass morphism base - dark transparent */
+    --background: 220 25% 10%;
+    --foreground: 210 40% 96%;
+
+    /* Glass panels */
+    --card: 220 20% 14%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 220 20% 12%;
+    --popover-foreground: 210 40% 96%;
+
+    /* Ocean-inspired primary - soft teal */
+    --primary: 195 60% 50%;
+    --primary-foreground: 220 25% 10%;
+
+    /* Secondary - muted slate */
+    --secondary: 220 15% 20%;
+    --secondary-foreground: 210 30% 90%;
+
+    /* Muted elements */
+    --muted: 220 15% 18%;
+    --muted-foreground: 215 15% 60%;
+
+    /* Accent - soft cyan glow */
+    --accent: 190 70% 45%;
+    --accent-foreground: 220 25% 10%;
+
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 15% 25%;
+    --input: 220 15% 22%;
+    --ring: 195 60% 50%;
+
+    --radius: 0.75rem;
+
+    /* Glass effect variables */
+    --glass-bg: 220 20% 12% / 0.85;
+    --glass-border: 220 20% 30% / 0.3;
+    --glass-shadow: 220 50% 5% / 0.4;
+
+    /* Message bubbles */
+    --message-sent: 195 50% 35%;
+    --message-received: 220 15% 22%;
+
+    /* Online indicator */
+    --online: 145 70% 50%;
+
+    /* Sidebar */
+    --sidebar-background: 220 20% 12%;
+    --sidebar-foreground: 210 30% 85%;
+    --sidebar-primary: 195 60% 50%;
+    --sidebar-primary-foreground: 220 25% 10%;
+    --sidebar-accent: 220 15% 18%;
+    --sidebar-accent-foreground: 210 30% 90%;
+    --sidebar-border: 220 15% 25%;
+    --sidebar-ring: 195 60% 50%;
   }
 }
