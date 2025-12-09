@@ -2,8 +2,4 @@
 
 ## Purpose
 
-This is a capstone project for Dalhousie Cloud Computing course - CSCI 3124, where you can choose to make any kinds of applications and have to make sure that it works on the Cloud.
-
-## Small note
-
-This is a simple chat application between doctor and patient, I initially didn't want to add the word "AI" to the project cause I don't want to jinx it. I want to have a good base first (i.e. a chat application with frontend + backend + cloud integration) then will incorporate AWS Bedrock or a local/open-source model for the actual RAG-implementation if I have enough time.
+This project proposes a solution to the problem of clinician administrative burdens through a simple chat application. The chatbot uses a lightweight Retrieval-Augmented Generation (RAG) approach to answer frequently asked questions related to the medical centre. Currently, due to university's finals and the tight project deadline, the current implementation is intentionally limited to information found in the FAQ documents. Despite its simplicity, the broader long-term goal of this project is to explore how RAG-based chatbots can meaningfully reduce administrative workload for clinicians.
