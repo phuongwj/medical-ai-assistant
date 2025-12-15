@@ -71,6 +71,10 @@ medical-ai-assistant/
 
 ### 1. Get a Gemini API Key
 - Sign up at [Google AI Studio](https://aistudio.google.com/app/apikey) and create a Gemini API key.
+
+### 2. Install PostgreSQL and pgvector
+- **Install PostgreSQL:**
+	- Download and install from [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
 - **Install Visual Studio C++ Build Tools (Windows only, required for pgvector):**
 	- Download from [https://visualstudio.microsoft.com/visual-cpp-build-tools/](https://visualstudio.microsoft.com/visual-cpp-build-tools/)
 	- During installation, select "Desktop development with C++".
@@ -83,7 +87,7 @@ medical-ai-assistant/
 		```
 	- If you get an error, ensure pgvector is installed. You can install it via [pgvector GitHub](https://github.com/pgvector/pgvector#installation) or using `CREATE EXTENSION` if using PostgreSQL 15+.
 
-    ### 3. Set Up the Database
+### 3. Set Up the Database
 - Create a new database (e.g., `medical_ai`):
 	```sh
 	createdb -U postgres medical_ai
