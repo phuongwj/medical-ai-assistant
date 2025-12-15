@@ -1,5 +1,13 @@
+import dotenv from 'dotenv';
+dotenv.config(); 
+
 import pool from '../databases/postgres.js';
 import { pipeline } from '@huggingface/transformers';
+import { GoogleGenAI } from '@google/genai';
+
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY
+});
 
 const SIMILARITY_THRESHOLD = 0.75;
 const TOP_K_CHUNKS = 3;
@@ -195,10 +203,35 @@ export const sendMessage = async (request, response) => {
             Context:\n${context}\n\nPatient Question: ${message}\n\nProvide a hepful answer based on the context ahove.
         `;
 
-        
+        const responseAI = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: `${systemPrompt}\n\n${userPrompt}`
+        });
 
+        const assistantResponse = responseAI.text;
+
+        // Returning responses with sources
+        const responseObj = {
+            success: true,
+            message: assistantResponse,
+            confidence: "high",
+            sources: relevantChunks.map(chunk => ({
+                title: chunk.title,
+                category: chunk.category,
+                similarity: chunk.similarity.toFixed(3)
+            }))
+        }
+
+        return response.status(200).send(JSON.stringify(responseObj));
 
     } catch (error) {
+        console.error("Error processing message: ", error);
+        const responseObj = {
+            success: false,
+            message: "I'm having trouble processing your request right now. Please try again or contact our office directly at (555) 123-4567.",
+            error: error.message
+        };
 
+        return response.status(500).send(JSON.stringify(responseObj));
     }
 }
