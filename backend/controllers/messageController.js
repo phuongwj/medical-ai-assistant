@@ -14,12 +14,14 @@ const TOP_K_CHUNKS = 3;
 
 /**
  * Simple text chunking function using Sentence-Based Chunking approach
+ * Overlap helps maintain context between chunks for better retrieval
  * 
  * @param {*} text - The text to be chunked
- * @param {*} chunkSize 
+ * @param {*} chunkSize - Maximum size of each chunk (default: 250 characters)
+ * @param {*} overlapSize - Size of overlap between chunks (default: 50 characters)
  * @returns chunks array
  */
-function chunkText(text, chunkSize=250) {
+function chunkText(text, chunkSize=250, overlapSize=50) {
     if (overlapSize >= chunkSize) {
         console.error("overlapSize must be less than chunkSize");
         overlapSize = 0;
