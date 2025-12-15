@@ -1,8 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config(); 
-
 import pool from '../databases/postgres.js';
-import { pipeline } from '@huggingface/transformers';
 import { GoogleGenAI } from '@google/genai';
 
 const ai = new GoogleGenAI({
@@ -50,15 +46,18 @@ function chunkText(text, chunkSize=250, overlapSize=50) {
     return chunks.length > 0 ? chunks : [text];
 }
 
+/**
+ * Generate embeddings using Gemini API
+ */
 async function generateEmbedding(text) {
     try {
-        const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-        const output = await extractor(text, {
-            pooling: 'mean',
-            normalize: true
+
+        const result = await ai.models.embedContent({
+            model: 'models/gemini-embedding-001',  // Note: full model path
+            contents: [{  parts: [{ text }] }],
         });
 
-        return Array.from(output.data);
+        return result.embeddings[0].values;
     } catch (error) {
         console.error("Error generating embeddings: ", error);
         throw error;
@@ -79,7 +78,7 @@ export const ingestDocuments = async (request, response) => {
     `;
 
     const insertChunksSql = `
-        INSERT INTO faq_chunks (document_id, content ,embedding) 
+        INSERT INTO faq_chunks (document_id, content, embedding) 
         VALUES ($1, $2, $3)
     `; 
 
@@ -104,9 +103,7 @@ export const ingestDocuments = async (request, response) => {
 
             for (const chunk of chunks) {
                 const embedding = await generateEmbedding(chunk);
-
                 await pool.query(insertChunksSql, [doc.id, chunk, JSON.stringify(embedding)]);
-
                 totalChunks++;
             }
         }
@@ -180,7 +177,7 @@ export const sendMessage = async (request, response) => {
                 message: responseMessage,
                 confidence: "low",
                 sources: []
-            }
+            };
 
             return response.status(200).send(JSON.stringify(responseObj));
         }
@@ -199,10 +196,13 @@ export const sendMessage = async (request, response) => {
             - Never provide medical diagnosis or clinical advice
             - Always suggest contacting a doctor for medical concerns
             - Use the context informatino to answer administrative questions about appointments, billing, hours, etc.
+
+            Context:
+            ${context}
         `;
 
         const userPrompt = `
-            Context:\n${context}\n\nPatient Question: ${message}\n\nProvide a hepful answer based on the context ahove.
+            Patient Question: ${message}\n\nProvide a hepful answer based on the context ahove.
         `;
 
         const responseAI = await ai.models.generateContent({
