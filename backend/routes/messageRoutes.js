@@ -1,6 +1,6 @@
-import express from "express";
-import { sendMessage } from "../controllers/messageController";
-import { ingestDocuments } from "../controllers/messageController";
+import express from 'express';
+import { sendMessage } from '../controllers/messageController';
+import { ingestDocuments } from '../controllers/messageController';
 
 const router = express.Router();
 
