@@ -7,7 +7,14 @@ import bodyParser from 'body-parser';
 import router from './routes/messageRoutes.js';
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_ORIGIN, 
+    credentials: true,
+  })
+);
 
 /* Parses incoming request bodies with a Content-Type of application/json */
 app.use(bodyParser.json());
