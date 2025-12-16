@@ -61,10 +61,13 @@ messageForm.addEventListener('submit', async (e) => {
     
     // Show typing indicator
     showTypingIndicator();
+
+    // AWS Elastic Beanstalk URL
+    const API_BASE_URL = "http://med-ai-env.us-east-1.elasticbeanstalk.com";
     
     try {
         // Call backend API
-        const response = await fetch('/api/sendMessage', {
+        const response = await fetch(`${API_BASE_URL}/api/sendMessage`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
