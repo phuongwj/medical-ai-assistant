@@ -28,6 +28,8 @@
 
 This project is a simple chat application designed to reduce clinician administrative burdens by answering frequently asked questions (FAQs) about a medical centre. It uses a lightweight Retrieval-Augmented Generation (RAG) approach, leveraging Google Gemini for AI responses and PostgreSQL with pgvector for semantic search. The chatbot only answers questions based on ingested FAQ documents, focusing on administrative topics (appointments, billing, hours, etc.) and never provides medical advice.
 
+You can check out the demo video [here](https://youtu.be/D6few9ELmfA).
+
 
 ## Project Structure
 
